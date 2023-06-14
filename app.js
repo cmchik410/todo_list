@@ -33,5 +33,28 @@ add.addEventListener("click", e => {
 
     todo.appendChild(time);
 
+    let completeBtn = document.createElement("button");
+
+    completeBtn.classList.add("complete");
+
+    completeBtn.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
+
+    completeBtn.addEventListener("click", e => {
+        let todoItem = e.target.parentElement;
+        todoItem.classList.toggle("done");
+    });
+
+    let trashBtn = document.createElement("button");
+
+    trashBtn.classList.add("trash");
+
+    trashBtn.innerHTML = '<i class="fa-solid fa-trash"></i>';
+
+    todo.appendChild(completeBtn);
+
+    todo.appendChild(trashBtn);
+
+    todo.style.animation = "scaleUp 0.3s forwards";
+
     section.appendChild(todo);
 })
