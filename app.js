@@ -9,9 +9,14 @@ add.addEventListener("click", e => {
 
     let todoText = form.children[0].value;
 
-    let todoMonth = form.children[1].value;
+    let todoDate = form.children[1].value;
 
-    let todoDate = form.children[2].value;
+    let todoMonth = form.children[2].value;
+
+    if (todoText === "" || todoDate === "" || todoMonth === "") {
+        alert("Missing Value");
+        return;
+    }
 
     let todo = document.createElement("div");
 
@@ -27,7 +32,7 @@ add.addEventListener("click", e => {
 
     time.classList.add("todo-time");
 
-    time.innerText = todoMonth + " / " + todoDate;
+    time.innerText = todoDate + " / " + todoMonth;
 
     todo.appendChild(text);
 
@@ -52,16 +57,39 @@ add.addEventListener("click", e => {
 
     trashBtn.addEventListener("click", e => {
         let todoItem = e.target.parentElement;
-        todoItem.style.animation = "scaleDown 0.3s forwards";
-        todoItem.remove();
-    })
 
+        todoItem.addEventListener("animationed", () => {
+            todoItem.remove();
+        })
+
+        todoItem.style.animation = "scaleDown 0.3s forwards";
+
+    })
 
     todo.appendChild(completeBtn);
 
     todo.appendChild(trashBtn);
 
     todo.style.animation = "scaleUp 0.3s forwards";
+
+    let myTodo = {
+        todoText: todoText,
+        todoMonth: todoMonth,
+        todoDate: todoDate,
+    }
+
+    let mylist = localStorage.getItem("list");
+
+    if (mylist == null) {
+        localStorage.setItem("list", JSON.stringify([myTodo]));
+    } else {
+        let myListArray = JSON.parse(mylist);
+        myListArray.push(myTodo);
+        localStorage.setItem("list", JSON.stringify(myListArray));
+    }
+
+
+
 
     section.appendChild(todo);
 })
