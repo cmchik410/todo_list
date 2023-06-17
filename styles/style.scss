@@ -1,0 +1,122 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+i {
+    pointer-events: none;
+}
+  
+body {
+    background-image: url("../res/bkg.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+header {
+    height: 20vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    h1 {
+        color: black;
+        font-size: 3rem;
+    }
+}
+
+form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    input,
+    button {
+      border: none;
+      padding: 0.25rem 0.5rem;
+      font-size: 1.75rem;
+      margin: 0.1rem;
+    }
+
+    input[type="number"] {
+        width: 50px;
+        text-align: center;
+    }
+    
+    /* Chrome, Safari, Edge, Opera */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+    }
+
+    /* Firefox */
+    input[type="number"] {
+    -moz-appearance: textfield;
+    }
+
+    button {
+        cursor: pointer;
+    }
+}
+
+div.sort {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+section  {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    div.todo {
+        width: 50vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0.2rem 0rem;
+        transition: all 0.1s ease;
+
+        p {
+            background-color: white;
+            color: black;
+            padding: 0.25rem 0.5rem;
+            font-size: 1.75rem;
+        }
+
+        p.todo-text {
+            width: 50%;
+        }
+
+        p.todo-time {
+            width: 20%;
+            text-align: center;
+        }
+
+        button {
+            padding: 0.25rem 0.5rem;
+            font-size: 1.75rem;
+            cursor: pointer;
+            border: none;
+        }
+            
+    }
+}
+
+@keyframes scaleUp {
+    from {
+        transform: scale(0);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+@keyframes scaleDown {
+    to {
+        transform: scale(0);
+    }
+}

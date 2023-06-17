@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=, initial-scale=1.0">
+        <title>Todo List</title>
+        <link 
+            rel="stylesheet" 
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" 
+            integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" 
+            crossorigin="anonymous" 
+            referrerpolicy="no-referrer" 
+        />
+        <link rel="stylesheet" href="./styles/style.css" />
+    </head>
+
+    <body>
+        <header>
+            <h1>Todo List</h1>    
+        </header>
+
+        <form>
+            <input type="text" value="Some work" required/>
+            <input type="number" min="1" max="31" placeholder="D" value="1" required />
+            <input type="number" min="1" max="12" placeholder="M" value="1" required />
+            <button type="submit">
+                <i class="fa-solid fa-circle-plus"></i>
+            </button>
+        </form>
+
+        <br>
+        <br>
+
+        <div class="sort">
+            <button>
+                Sort by time
+            </button>
+        </div>
+
+        <section>
+
+        </section>
+        
+
+    </body>
+    <script src="./app.js"></script>
+</html>
