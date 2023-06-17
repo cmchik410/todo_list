@@ -21,20 +21,21 @@ add.addEventListener("click", e => {
 
     let todoCell = create_todo(newTodo);
 
-    let currList = localStorage.getItem("list");
+    let todoList = localStorage.getItem("todolist");
 
-    if (currList == null) {
-        localStorage.setItem("list", JSON.stringify([newTodo]));
+    if (todoList == null) {
+        localStorage.setItem("todoList", JSON.stringify([newTodo]));
     } else {
-        let currListArray = JSON.parse(currList);
-        currListArray.push(newTodo);
-        localStorage.setItem("list", JSON.stringify(currListArray));
+        let newTodoList = JSON.parse(todoList);
+        newTodoList.push(newTodo);
+        localStorage.setItem("list", JSON.stringify(newTodoList));
     }
 
     section.appendChild(todoCell);
 })
 
 loadData();
+
 
 function create_todo(item) {
     let todoCell = document.createElement("div");
@@ -90,10 +91,10 @@ function create_todo(item) {
 }
 
 function loadData() {
-    let myList = localStorage.getItem("list");
-    if (myList !== null) {
-        let myListArray = JSON.parse(myList);
-        myListArray.forEach(item => {
+    let todolist = localStorage.getItem("todolist");
+    if (todolist !== null) {
+        let todolist = JSON.parse(todolist);
+        todolist.forEach(item => {
             let todoCell = create_todo(item);
             section.appendChild(todoCell);
         })
