@@ -1,6 +1,8 @@
 let section = document.querySelector("section");
 let add = document.querySelector("form button");
+let sort = document.querySelector("div.sort button");
 
+load_data()
 
 add.addEventListener("click", e => {
 
@@ -10,8 +12,8 @@ add.addEventListener("click", e => {
 
     let newTodo = {
         todoText: form.children[0].value,
-        todoMonth: form.children[1].value,
-        todoDate: form.children[2].value
+        todoDate: form.children[1].value,
+        todoMonth: form.children[2].value
     };
     
     if (newTodo.todoText === "" || newTodo.todoMonth === "" || newTodo.todoDate === "") {
@@ -24,17 +26,29 @@ add.addEventListener("click", e => {
     let todoList = localStorage.getItem("todolist");
 
     if (todoList == null) {
-        localStorage.setItem("todoList", JSON.stringify([newTodo]));
+        localStorage.setItem("todolist", JSON.stringify([newTodo]));
     } else {
         let newTodoList = JSON.parse(todoList);
         newTodoList.push(newTodo);
-        localStorage.setItem("list", JSON.stringify(newTodoList));
+        localStorage.setItem("todolist", JSON.stringify(newTodoList));
     }
 
     section.appendChild(todoCell);
 })
 
-loadData();
+sort.addEventListener("click", e => {
+    let todoListArray = JSON.parse(localStorage.getItem("todolist"));
+
+    sortedArray = mergeSort(todoListArray);
+
+    localStorage.setItem("todolist", JSON.stringify(sortedArray));
+
+    for (let i = 0; i < section.children.length; i++) {
+        section.children[0].remove();
+    }
+
+    load_data();
+})
 
 
 function create_todo(item) {
@@ -68,11 +82,11 @@ function create_todo(item) {
 
         todoItem.addEventListener("animationend", () => {
             let text = todoItem.children[0].innerText;
-            let currListArray = JSON.parse(localStorage.getItem("list"));
-            currListArray.forEach((item, idx) => {
+            let todoListArray = JSON.parse(localStorage.getItem("todolist"));
+            todoListArray.forEach((item, idx) => {
                 if (item.todoText == text) {
-                    currListArray.splice(idx, 1);
-                    localStorage.setItem("list", JSON.stringify(currListArray));                    
+                    todoListArray.splice(idx, 1);
+                    localStorage.setItem("todolist", JSON.stringify(todoListArray));                    
                 }
             })
         
@@ -90,13 +104,61 @@ function create_todo(item) {
     return todoCell;
 }
 
-function loadData() {
-    let todolist = localStorage.getItem("todolist");
-    if (todolist !== null) {
-        let todolist = JSON.parse(todolist);
-        todolist.forEach(item => {
+function load_data() {
+    let todoList = localStorage.getItem("todolist");
+    if (todoList !== null) {
+        let todoListArray = JSON.parse(todoList);
+        todoListArray.forEach(item => {
             let todoCell = create_todo(item);
             section.appendChild(todoCell);
         })
+    }
+}
+
+
+function mergeStep(arr1, arr2) {
+    let result = [];
+    let i = 0;
+    let j = 0;
+
+    while (i < arr1.length && j < arr2.length) {
+        if (Number(arr1[i].todoMonth) > Number(arr2[j].todoMonth)) {
+            result.push(arr2[j]);
+            j++;
+        } else if (Number(arr1[i].todoMonth) < Number(arr2[j].todoMonth)) {
+            result.push(arr1[i]);
+            i++;
+        } else if (Number(arr1[i].todoMonth) == Number(arr2[j].todoMonth)) {
+            if (Number(arr1[i].todoDate) > Number(arr2[j].todoDate)) {
+                result.push(arr2[j]);
+                j++;
+            } else {
+                result.push(arr1[i]);
+                i++;
+            }
+        }
+    }
+
+    while (i < arr1.length) {
+        result.push(arr1[i]);
+        ++i;
+    }
+
+    while (j < arr2.length) {
+        result.push(arr3[j]);
+        ++j;
+    }
+
+    return result;
+}
+
+function mergeSort(arr) {
+    if (arr.length === 1) {
+        return arr;
+    } else {
+        let mid = Math.floor(arr.length / 2);
+        let right = arr.slice(0, mid);
+        let left = arr.slice(mid, arr.length);
+        return mergeStep(mergeSort(right), mergeSort(left));
     }
 }
