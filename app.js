@@ -2,7 +2,7 @@ let section = document.querySelector("section");
 let add = document.querySelector("form button");
 let sort = document.querySelector("div.sort button");
 
-load_data()
+load_data();
 
 add.addEventListener("click", e => {
 
@@ -16,8 +16,7 @@ add.addEventListener("click", e => {
         todoMonth: form.children[2].value
     };
     
-    if (newTodo.todoText === "" || newTodo.todoMonth === "" || newTodo.todoDate === "") {
-        alert("Missing value");
+    if (input_check(newTodo) == false) {
         return;
     }
 
@@ -43,12 +42,57 @@ sort.addEventListener("click", e => {
 
     localStorage.setItem("todolist", JSON.stringify(sortedArray));
 
-    for (let i = 0; i < section.children.length; i++) {
+    let len = section.children.length;
+    for (let i = 0; i < len; i++) {
         section.children[0].remove();
     }
 
     load_data();
 })
+
+function input_check(item) {
+    if (item.todoText === "" || item.todoMonth === "" || item.todoDate === "") {
+        alert("Missing value");
+        return false;
+    }
+
+    let m = Number(item.todoMonth);
+    let d = Number(item.todoDate);
+
+    switch (m) {
+        case 1:
+        case 3:
+        case 5:
+        case 7:
+        case 8:
+        case 11:
+            if (d < 1 || d > 31) {
+                alert("Invalid Date Input");
+                return false;    
+            }
+            break;
+        case 4:
+        case 6:
+        case 9:
+        case 12:
+            if (d < 1 || d > 30) {
+                alert("Invalid Date Input");
+                return false;    
+            }
+            break;
+        case 2:
+            if (d < 1 || d > 29) {
+                alert("Invalid Date Input");
+                return false;      
+            }
+            break;
+        default:
+            alert("Invalid Month Input");
+            return false;  
+    }
+
+    return true;
+}
 
 
 function create_todo(item) {
@@ -145,7 +189,7 @@ function mergeStep(arr1, arr2) {
     }
 
     while (j < arr2.length) {
-        result.push(arr3[j]);
+        result.push(arr2[j]);
         ++j;
     }
 
