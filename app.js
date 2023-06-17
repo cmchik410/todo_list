@@ -112,6 +112,7 @@ function create_todo(item) {
 
     let completeBtn = document.createElement("button");
     completeBtn.classList.add("complete");
+    completeBtn.title = "Completed";
     completeBtn.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
     completeBtn.addEventListener("click", e => {
         let todoItem = e.target.parentElement;
@@ -120,6 +121,7 @@ function create_todo(item) {
 
     let trashBtn = document.createElement("button");
     trashBtn.classList.add("trash");
+    trashBtn.title = "Remove item";
     trashBtn.innerHTML = '<i class="fa-solid fa-trash"></i>';
     trashBtn.addEventListener("click", e => {
         let todoItem = e.target.parentElement;

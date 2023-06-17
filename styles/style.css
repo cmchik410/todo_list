@@ -84,6 +84,11 @@ div.sort {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  margin: 0.5rem;
+}
+
+div.sort button {
+  font-size: 1.75rem;
 }
 
 section {
@@ -113,7 +118,7 @@ section div.todo {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  margin: 0.2rem 0rem;
+  margin: 0.5rem 0rem;
   -webkit-transition: all 0.1s ease;
   transition: all 0.1s ease;
 }

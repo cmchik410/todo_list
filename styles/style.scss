@@ -64,6 +64,11 @@ div.sort {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 0.5rem;
+
+    button {
+        font-size: 1.75rem;
+    }
 }
 
 section  {
@@ -77,7 +82,7 @@ section  {
         display: flex;
         justify-content: center;
         align-items: center;
-        margin: 0.2rem 0rem;
+        margin: 0.5rem 0rem;
         transition: all 0.1s ease;
 
         p {
