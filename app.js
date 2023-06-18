@@ -99,6 +99,7 @@ function create_todo(item) {
     let todoCell = document.createElement("div");
     todoCell.classList.add("todo");
 
+
     let text = document.createElement("p");
     text.classList.add("todo-text");
     text.innerText = item.todoText
@@ -115,8 +116,7 @@ function create_todo(item) {
     completeBtn.title = "Completed";
     completeBtn.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
     completeBtn.addEventListener("click", e => {
-        let todoItem = e.target.parentElement;
-        todoItem.classList.toggle("done");
+        todoCell.classList.toggle("done");
     })
 
     let trashBtn = document.createElement("button");
